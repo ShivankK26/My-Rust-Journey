@@ -99,6 +99,26 @@ fn main() {
 
     print_option_value(some_value);
     print_option_value(none_value);
+
+    // Ques-10: Define an enum named Direction with variants representing directions (North, South, East, West). Write a function that takes a Direction enum variant and prints a corresponding message.
+    let direction = Direction::East;
+    print_direction(direction);
+
+    // Ques-11: Create a tuple (u8, u8) representing coordinates (x, y). Write a function that takes this tuple and prints "Quadrant I," "Quadrant II," etc., based on the quadrant the coordinates fall into.
+    let my_tuple = (1, 2);
+    print_quadrant(my_tuple);
+
+    // Ques-12: Write a function that takes an integer and prints "Positive," "Negative," or "Zero" based on the value.
+    let my_num = 7;
+    print_integer_value(my_num);
+
+    // Ques-13: Define a struct named Person with fields for name (String) and age (u32). Write a function that takes a Person and prints different messages based on the age.
+    let new_person = Person_w {
+        age: 32,
+        name: String::from("Akshay"),
+    };
+
+    age_struct(new_person);
 }
 
 struct tuple {
@@ -169,5 +189,52 @@ fn print_option_value(option_value: Option<i32>) {
     match option_value {
         Some(value) => println!("Some: {}", value),
         None => println!("None"),
+    }
+}
+
+enum Direction {
+    North,
+    South,
+    West,
+    East,
+}
+
+fn print_direction(dir: Direction) {
+    match dir {
+        Direction::North => println!("Heading North!"),
+        Direction::South => println!("Heading South!"),
+        Direction::East => println!("Heading East!"),
+        Direction::West => println!("Heading West!"),
+    }
+}
+
+fn print_quadrant(coordinates: (u8, u8)) {
+    match coordinates {
+        (x, y) if x > 0 && y > 0 => println!("Quadrant 1"),
+        (x, y) if x < 0 && y > 0 => println!("Quadrant 2"),
+        (x, y) if x < 0 && y < 0 => println!("Quadrant 3"),
+        (x, y) if x > 0 && y < 0 => println!("Quadrant 4"),
+        _ => println!("On the axis or at origin"),
+    }
+}
+
+fn print_integer_value(number: i32) {
+    match num {
+        n if n > 0 => println!("Number is positive."),
+        n if n < 0 => println!("Number is negative."),
+        _ => println!("Zero it is."),
+    }
+}
+
+struct Person_w {
+    age: u32,
+    name: String,
+}
+
+fn age_struct(person: Person_w) {
+    match person.age {
+        age if age < 18 => println!("{} is a minor.", person.age),
+        age if age > 18 => println!("{} is a major.", person.age),
+        _ => println!("{} is a senior citizen.", person.name),
     }
 }

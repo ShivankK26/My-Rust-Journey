@@ -1,3 +1,5 @@
+use std::fs::File;
+
 fn main() {
     // Ques-1: Use pattern matching to match a tuple (x, y) where x is an integer and y is a character.
     // Print "Matched!" if the tuple matches, and "Not Matched!" otherwise.
@@ -73,6 +75,30 @@ fn main() {
     let string_2 = None;
     string_length(string_1);
     string_length(string_2);
+
+    // Ques-8: Define a custom error type named FileError with variants representing different file-related errors (e.g., NotFound, PermissionDenied).
+    let file_path = "helllo.txt";
+
+    match open_file(file_path) {
+        Ok(()) => print!("File opened successfully"),
+        Err(err) => match err {
+            FileErrors::NotFound => print!("File not found!"),
+            FileErrors::PermissionDenied => print!("Permission denied to open the file!"),
+            FileErrors::IOError(io_err) => {
+                print!("IOError: {:?}", io_err);
+            }
+            FileErrors::CustomError(custom_msg) => {
+                print!("Custom Error: {}", custom_msg);
+            }
+        },
+    }
+
+    // Ques-9: Implement a function that takes an Option<i32> and prints "Some: <value>" if it contains a value, or "None" if it is empty.
+    let some_value = Some(42);
+    let none_value = None;
+
+    print_option_value(some_value);
+    print_option_value(none_value);
 }
 
 struct tuple {
@@ -125,5 +151,23 @@ fn string_length(string: Option<String>) {
             println!("The length of the string is: {}", length);
         }
         None => println!("No string present."),
+    }
+}
+
+enum FileErrors {
+    NotFound,
+    PermissionDenied,
+    CustomError(String),
+    IOError(std::io::Error),
+}
+
+fn open_file(file_path: &str) -> Result<(), FileErrors> {
+    Err(FileErrors::NotFound)
+}
+
+fn print_option_value(option_value: Option<i32>) {
+    match option_value {
+        Some(value) => println!("Some: {}", value),
+        None => println!("None"),
     }
 }

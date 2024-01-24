@@ -11,7 +11,7 @@ fn main() {
     // });
 
     // my_trait_object.talk();
-    let speakers: Vec<Box<dyn MakeNoise>> = Vec::new();
+    let mut speakers: Vec<Box<dyn MakeNoise>> = Vec::new();
     speakers.push(Box::new(Bird {
         name: "bird1".to_string(),
         color: "yellow".to_string(),
